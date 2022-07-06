@@ -1,3 +1,6 @@
+NOTE - This library was modified to support compilation of the libpng library to 
+WebAssembly. 
+
 README for libpng version 1.6.38.git
 ====================================
 
