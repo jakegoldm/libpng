@@ -1,6 +1,6 @@
 #! /bin/bash
 # Generated automatically by config.status (libpng) 1.6.38.git
-# Libtool was configured on host DESKTOP-B7SMBKG:
+# Libtool was configured on host jgoldman:
 # NOTE: Changes made to this file will be lost: look at ltmain.sh.
 
 # Provide generalized library-building support services.
@@ -72,7 +72,7 @@ DLLTOOL="false"
 OBJDUMP="objdump"
 
 # Whether or not to build shared libraries.
-build_libtool_libs=no
+build_libtool_libs=yes
 
 # Whether or not to build static libraries.
 build_old_libs=yes
@@ -81,7 +81,7 @@ build_old_libs=yes
 pic_mode=default
 
 # Whether or not to optimize for fast installation.
-fast_install=yes
+fast_install=needless
 
 # Shared archive member basename,for filename based shared library versioning on AIX.
 shared_archive_member_spec=
@@ -90,9 +90,9 @@ shared_archive_member_spec=
 PATH_SEPARATOR=":"
 
 # The host system.
-host_alias=wasm32
-host=wasm32-unknown-none
-host_os=none
+host_alias=
+host=x86_64-pc-linux-gnu
+host_os=linux-gnu
 
 # The build system.
 build_alias=
@@ -100,7 +100,7 @@ build=x86_64-pc-linux-gnu
 build_os=linux-gnu
 
 # A BSD- or MS-compatible name lister.
-NM="nm"
+NM="/opt/wasi-sdk/wasi-sdk-14.0/bin/nm -B"
 
 # Whether we need soft or hard links.
 LN_S="ln -s"
@@ -130,7 +130,7 @@ to_host_file_cmd=func_convert_file_noop
 to_tool_file_cmd=func_convert_file_noop
 
 # Method to check whether dependent libraries are shared objects.
-deplibs_check_method="unknown"
+deplibs_check_method="pass_all"
 
 # Command to use when deplibs_check_method = "file_magic".
 file_magic_cmd="\$MAGIC_CMD"
@@ -165,7 +165,7 @@ old_postuninstall_cmds=""
 lock_old_archive_extraction=no
 
 # A C compiler.
-LTCC="/opt/wasi-sdk/wasi-sdk-14.0/bin/clang"
+LTCC="gcc"
 
 # LTCC compiler flags.
 LTCFLAGS="-g -O2"
@@ -192,7 +192,7 @@ nm_interface="BSD nm"
 nm_file_list_spec="@"
 
 # The root where to search for dependent libraries,and where our libraries should be installed.
-lt_sysroot=/opt/wasi-sdk/wasi-sdk-14.0/share/wasi-sysroot
+lt_sysroot=
 
 # Command to truncate a binary pipe.
 lt_truncate_bin="/usr/bin/dd bs=4096 count=1"
@@ -235,35 +235,35 @@ extract_expsyms_cmds=""
 
 # Variables whose values should be saved in libtool wrapper scripts and
 # restored at link time.
-variables_saved_for_relink="PATH   GCC_EXEC_PREFIX COMPILER_PATH LIBRARY_PATH"
+variables_saved_for_relink="PATH LD_LIBRARY_PATH LD_RUN_PATH GCC_EXEC_PREFIX COMPILER_PATH LIBRARY_PATH"
 
 # Do we need the "lib" prefix for modules?
-need_lib_prefix=unknown
+need_lib_prefix=no
 
 # Do we need a version for libraries?
-need_version=unknown
+need_version=no
 
 # Library versioning type.
-version_type=none
+version_type=linux
 
 # Shared library runtime path variable.
-runpath_var=
+runpath_var=LD_RUN_PATH
 
 # Shared library path variable.
-shlibpath_var=
+shlibpath_var=LD_LIBRARY_PATH
 
 # Is shlibpath searched before the hard-coded library search path?
-shlibpath_overrides_runpath=unknown
+shlibpath_overrides_runpath=yes
 
 # Format of library name prefix.
 libname_spec="lib\$name"
 
 # List of archive names.  First name is the real one, the rest are links.
 # The last name is the one that the linker finds with -lNAME
-library_names_spec=""
+library_names_spec="\$libname\$release\$shared_ext\$versuffix \$libname\$release\$shared_ext\$major \$libname\$shared_ext"
 
 # The coded name of the library, if different from the real name.
-soname_spec=""
+soname_spec="\$libname\$release\$shared_ext\$major"
 
 # Permission mode override for installation of shared libraries.
 install_override_mode=""
@@ -275,20 +275,20 @@ postinstall_cmds=""
 postuninstall_cmds=""
 
 # Commands used to finish a libtool library installation in a directory.
-finish_cmds=""
+finish_cmds="PATH=\\\"\\\$PATH:/sbin\\\" ldconfig -n \$libdir"
 
 # As "finish_cmds", except a single script fragment to be evaled but
 # not shown.
 finish_eval=""
 
 # Whether we should hardcode library paths into libraries.
-hardcode_into_libs=no
+hardcode_into_libs=yes
 
 # Compile-time system search path for libraries.
-sys_lib_search_path_spec="/opt/wasi-sdk/wasi-sdk-14.0/lib/clang/13.0.0 /opt/wasi-sdk/wasi-sdk-14.0/share/wasi-sysroot/lib/wasm32-wasi "
+sys_lib_search_path_spec="/usr/lib/gcc/x86_64-linux-gnu/9 /usr/lib/x86_64-linux-gnu /usr/lib /lib/x86_64-linux-gnu /lib "
 
 # Detected run-time system search path for libraries.
-sys_lib_dlsearch_path_spec="/lib /usr/lib"
+sys_lib_dlsearch_path_spec="/lib /usr/lib /usr/lib/x86_64-linux-gnu/libfakeroot /usr/local/lib /usr/local/lib/x86_64-linux-gnu /lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu /lib32 /usr/lib32 /libx32 /usr/libx32 "
 
 # Explicit LT_SYS_LIBRARY_PATH set during ./configure time.
 configure_time_lt_sys_library_path=""
@@ -308,7 +308,7 @@ striplib="strip --strip-unneeded"
 
 
 # The linker used to build libraries.
-LD="/opt/wasi-sdk/wasi-sdk-14.0/bin/wasm-ld"
+LD="/usr/bin/ld -m elf_x86_64"
 
 # How to create reloadable object files.
 reload_flag=" -r"
@@ -318,13 +318,13 @@ reload_cmds="\$LD\$reload_flag -o \$output\$reload_objs"
 old_archive_cmds="\$AR \$AR_FLAGS \$oldlib\$oldobjs~\$RANLIB \$tool_oldlib"
 
 # A language specific compiler.
-CC="/opt/wasi-sdk/wasi-sdk-14.0/bin/clang"
+CC="gcc"
 
 # Is the compiler the GNU compiler?
 with_gcc=yes
 
 # Compiler flag to turn off builtin functions.
-no_builtin_flag=" -fno-builtin -fno-rtti -fno-exceptions"
+no_builtin_flag=" -fno-builtin"
 
 # Additional compiler flags for building library objects.
 pic_flag=" -fPIC -DPIC"
@@ -339,16 +339,16 @@ link_static_flag="-static"
 compiler_c_o="yes"
 
 # Whether or not to add -lc for building shared libraries.
-build_libtool_need_lc=yes
+build_libtool_need_lc=no
 
 # Whether or not to disallow shared libs when runtime libs are static.
 allow_libtool_libs_with_static_runtimes=no
 
 # Compiler flag to allow reflexive dlopens.
-export_dynamic_flag_spec=""
+export_dynamic_flag_spec="\$wl--export-dynamic"
 
 # Compiler flag to generate shared objects directly from archives.
-whole_archive_flag_spec=""
+whole_archive_flag_spec="\$wl--whole-archive\$convenience \$wl--no-whole-archive"
 
 # Whether the compiler copes with passing no objects directly.
 compiler_needs_object="no"
@@ -360,8 +360,11 @@ old_archive_from_new_cmds=""
 old_archive_from_expsyms_cmds=""
 
 # Commands used to build a shared archive.
-archive_cmds=""
-archive_expsym_cmds=""
+archive_cmds="\$CC -shared \$pic_flag \$libobjs \$deplibs \$compiler_flags \$wl-soname \$wl\$soname -o \$lib"
+archive_expsym_cmds="echo \\\"{ global:\\\" > \$output_objdir/\$libname.ver~
+            cat \$export_symbols | sed -e \\\"s/\\\\(.*\\\\)/\\\\1;/\\\" >> \$output_objdir/\$libname.ver~
+            echo \\\"local: *; };\\\" >> \$output_objdir/\$libname.ver~
+            \$CC -shared \$pic_flag \$libobjs \$deplibs \$compiler_flags \$wl-soname \$wl\$soname \$wl-version-script \$wl\$output_objdir/\$libname.ver -o \$lib"
 
 # Commands used to build a loadable module if different from building
 # a shared archive.
@@ -369,7 +372,7 @@ module_cmds=""
 module_expsym_cmds=""
 
 # Whether we are building with GNU ld or not.
-with_gnu_ld="no"
+with_gnu_ld="yes"
 
 # Flag that allows shared libraries with undefined symbols to be built.
 allow_undefined_flag=""
@@ -379,7 +382,7 @@ no_undefined_flag=""
 
 # Flag to hardcode $libdir into a binary during linking.
 # This must work even if $libdir does not exist
-hardcode_libdir_flag_spec=""
+hardcode_libdir_flag_spec="\$wl-rpath \$wl\$libdir"
 
 # Whether we need a single "-rpath" flag with a separated argument.
 hardcode_libdir_separator=""
@@ -436,7 +439,7 @@ postlink_cmds=""
 file_list_spec=""
 
 # How to hardcode a shared library path into an executable.
-hardcode_action=unsupported
+hardcode_action=immediate
 
 # ### END LIBTOOL CONFIG
 

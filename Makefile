@@ -99,7 +99,7 @@ NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = x86_64-pc-linux-gnu
-host_triplet = wasm32-unknown-none
+host_triplet = x86_64-pc-linux-gnu
 check_PROGRAMS = pngtest$(EXEEXT) pngunknown$(EXEEXT) \
 	pngstest$(EXEEXT) pngimage$(EXEEXT) \
 	pngcp$(EXEEXT) $(am__EXEEXT_1)
@@ -112,18 +112,18 @@ bin_PROGRAMS = pngfix$(EXEEXT) png-fix-itxt$(EXEEXT)
 am__append_3 = mips/mips_init.c\
 	mips/filter_msa_intrinsics.c
 
-am__append_4 = intel/intel_init.c\
-	intel/filter_sse2_intrinsics.c
+#am__append_4 = intel/intel_init.c\
+#	intel/filter_sse2_intrinsics.c
 
 am__append_5 = powerpc/powerpc_init.c\
         powerpc/filter_vsx_intrinsics.c
 
 
 #   Versioned symbols and restricted exports
-##am__append_6 = -Wl,-M -Wl,libpng.vers
-#am__append_7 = -Wl,--version-script=libpng.vers
+#am__append_6 = -Wl,-M -Wl,libpng.vers
+am__append_7 = -Wl,--version-script=libpng.vers
 #   Only restricted exports when possible
-am__append_8 = -export-symbols libpng.sym
+#am__append_8 = -export-symbols libpng.sym
 #am__append_9 = -DPNG_PREFIX=''
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -194,8 +194,8 @@ am__dirstamp = $(am__leading_dot)dirstamp
 #	arm/palette_neon_intrinsics.lo
 am__objects_2 = mips/mips_init.lo \
 	mips/filter_msa_intrinsics.lo
-am__objects_3 = intel/intel_init.lo \
-	intel/filter_sse2_intrinsics.lo
+#am__objects_3 = intel/intel_init.lo \
+#	intel/filter_sse2_intrinsics.lo
 am__objects_4 = powerpc/powerpc_init.lo \
 	powerpc/filter_vsx_intrinsics.lo
 am_libpng16_la_OBJECTS = png.lo pngerror.lo \
@@ -557,23 +557,23 @@ distcleancheck_listfiles = find . -type f -print
 
 #distribute headers in /usr/include/libpng/*
 pkgincludedir = $(includedir)/$(PNGLIB_BASENAME)
-ACLOCAL = ${SHELL} /home/jgoldman/image_decoding/libpng/missing aclocal-1.16
+ACLOCAL = ${SHELL} /home/jake/simd-decoding/libpng/missing aclocal-1.16
 AMTAR = $${TAR-tar}
 AM_DEFAULT_VERBOSITY = 1
 AR = ar
 AS = as
-AUTOCONF = ${SHELL} /home/jgoldman/image_decoding/libpng/missing autoconf
-AUTOHEADER = ${SHELL} /home/jgoldman/image_decoding/libpng/missing autoheader
-AUTOMAKE = ${SHELL} /home/jgoldman/image_decoding/libpng/missing automake-1.16
+AUTOCONF = ${SHELL} /home/jake/simd-decoding/libpng/missing autoconf
+AUTOHEADER = ${SHELL} /home/jake/simd-decoding/libpng/missing autoheader
+AUTOMAKE = ${SHELL} /home/jake/simd-decoding/libpng/missing automake-1.16
 AWK = gawk
-CC = /opt/wasi-sdk/wasi-sdk-14.0/bin/clang
-CCAS = /opt/wasi-sdk/wasi-sdk-14.0/bin/clang
+CC = gcc
+CCAS = gcc
 CCASDEPMODE = depmode=gcc3
 CCASFLAGS = -g -O2
 CCDEPMODE = depmode=gcc3
 CFLAGS = -g -O2
-CPP = /opt/wasi-sdk/wasi-sdk-14.0/bin/clang -E
-CPPFLAGS = 
+CPP = gcc -E
+CPPFLAGS = -I/opt/simde-no-tests/wasm
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
@@ -583,10 +583,10 @@ DEPDIR = .deps
 # checks input tokens for validity - effectively it performs part of the ANSI-C
 # parsing - and therefore fails with the .df files.  configure.ac has special
 # checks for this and sets DFNCPP appropriately.
-DFNCPP = /opt/wasi-sdk/wasi-sdk-14.0/bin/clang -E
+DFNCPP = gcc -E
 DLLTOOL = false
 DSYMUTIL = 
-DUMPBIN = :
+DUMPBIN = 
 ECHO_C = 
 ECHO_N = -n
 ECHO_T = 
@@ -599,20 +599,20 @@ INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_PROGRAM = ${INSTALL}
 INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
-LD = /opt/wasi-sdk/wasi-sdk-14.0/bin/wasm-ld
-LDFLAGS = -L/opt/wasi-sdk/wasi-sdk-14.0/share/wasi-sysroot/lib 	 -Wl,--no-entry 	 -Wl,--export-all 	 -Wl,--growable-table -s -w
-LIBOBJS =  ${LIBOBJDIR}strtod$U.o
-LIBS = -lz 
+LD = /usr/bin/ld -m elf_x86_64
+LDFLAGS = 
+LIBOBJS = 
+LIBS = -lm -lz -lm 
 LIBTOOL = $(SHELL) $(top_builddir)/libtool
 LIPO = 
 LN_S = ln -s
-LTLIBOBJS =  ${LIBOBJDIR}strtod$U.lo
+LTLIBOBJS = 
 LT_SYS_LIBRARY_PATH = 
 MAINT = #
-MAKEINFO = ${SHELL} /home/jgoldman/image_decoding/libpng/missing makeinfo
+MAKEINFO = ${SHELL} /home/jake/simd-decoding/libpng/missing makeinfo
 MANIFEST_TOOL = :
 MKDIR_P = /usr/bin/mkdir -p
-NM = nm
+NM = /opt/wasi-sdk/wasi-sdk-14.0/bin/nm -B
 NMEDIT = 
 OBJDUMP = objdump
 OBJEXT = o
@@ -644,13 +644,13 @@ SHELL = /bin/bash
 STRIP = strip
 SYMBOL_PREFIX = 
 VERSION = 1.6.38.git
-abs_builddir = /home/jgoldman/image_decoding/libpng
-abs_srcdir = /home/jgoldman/image_decoding/libpng
-abs_top_builddir = /home/jgoldman/image_decoding/libpng
-abs_top_srcdir = /home/jgoldman/image_decoding/libpng
+abs_builddir = /home/jake/simd-decoding/libpng
+abs_srcdir = /home/jake/simd-decoding/libpng
+abs_top_builddir = /home/jake/simd-decoding/libpng
+abs_top_srcdir = /home/jake/simd-decoding/libpng
 ac_ct_AR = ar
-ac_ct_CC = 
-ac_ct_DUMPBIN = link -dump
+ac_ct_CC = gcc
+ac_ct_DUMPBIN = 
 am__include = include
 am__leading_dot = .
 am__quote = 
@@ -671,15 +671,15 @@ datarootdir = ${prefix}/share
 docdir = ${datarootdir}/doc/${PACKAGE_TARNAME}
 dvidir = ${docdir}
 exec_prefix = ${prefix}
-host = wasm32-unknown-none
-host_alias = wasm32
-host_cpu = wasm32
-host_os = none
-host_vendor = unknown
+host = x86_64-pc-linux-gnu
+host_alias = 
+host_cpu = x86_64
+host_os = linux-gnu
+host_vendor = pc
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /home/jgoldman/image_decoding/libpng/install-sh
+install_sh = ${SHELL} /home/jake/simd-decoding/libpng/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -692,7 +692,7 @@ pdfdir = ${docdir}
 # pkg-config stuff, note that libpng.pc is always required in order
 # to get the correct library
 pkgconfigdir = ${libdir}/pkgconfig
-prefix = /opt/wasi-sdk/wasi-sdk-14.0/share/wasi-sysroot
+prefix = /usr/local
 program_transform_name = s,x,x,
 psdir = ${docdir}
 sbindir = ${exec_prefix}/sbin
@@ -773,8 +773,8 @@ libpng16_la_LDFLAGS = -no-undefined \
 	-export-dynamic -version-number \
 	16:38:0 \
 	$(am__append_6) $(am__append_7) $(am__append_8)
-libpng16_la_DEPENDENCIES = libpng.sym
-#libpng16_la_DEPENDENCIES = libpng.vers
+#libpng16_la_DEPENDENCIES = libpng.sym
+libpng16_la_DEPENDENCIES = libpng.vers
 pkginclude_HEADERS = png.h pngconf.h
 nodist_pkginclude_HEADERS = pnglibconf.h
 pkgconfig_DATA = libpng16.pc

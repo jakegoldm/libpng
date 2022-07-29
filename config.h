@@ -2,16 +2,16 @@
 /* config.h.in.  Generated from configure.ac by autoheader.  */
 
 /* Define to 1 if you have the <dlfcn.h> header file. */
-/* #undef HAVE_DLFCN_H */
+#define HAVE_DLFCN_H 1
 
 /* Define to 1 if you have the `feenableexcept' function. */
-/* #undef HAVE_FEENABLEEXCEPT */
+#define HAVE_FEENABLEEXCEPT 1
 
 /* Define to 1 if you have the <inttypes.h> header file. */
 #define HAVE_INTTYPES_H 1
 
 /* Define to 1 if you have the `m' library (-lm). */
-/* #undef HAVE_LIBM */
+#define HAVE_LIBM 1
 
 /* Define to 1 if you have the `z' library (-lz). */
 #define HAVE_LIBZ 1
@@ -20,7 +20,7 @@
 #define HAVE_MEMORY_H 1
 
 /* Define to 1 if you have the `pow' function. */
-#define HAVE_POW 1
+/* #undef HAVE_POW */
 
 /* Define to 1 if you have the <stdint.h> header file. */
 #define HAVE_STDINT_H 1
@@ -77,7 +77,7 @@
 /* #undef PNG_ARM_NEON_OPT */
 
 /* Enable Intel SSE optimizations */
-#define PNG_INTEL_SSE_OPT 1
+#define PNG_INTEL_SSE_OPT 0
 
 /* Turn on MIPS MSA optimizations at run-time */
 /* #undef PNG_MIPS_MSA_API_SUPPORTED */
