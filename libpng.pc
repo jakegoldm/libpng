@@ -8,5 +8,5 @@ Description: Loads and saves PNG files
 Version: 1.6.38.git
 Requires.private: zlib
 Libs: -L${libdir} -lpng16
-Libs.private: -lz 
+Libs.private: -lz -lwasi-emulated-signal
 Cflags: -I${includedir}

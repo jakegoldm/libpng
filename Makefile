@@ -112,8 +112,8 @@ bin_PROGRAMS = pngfix$(EXEEXT) png-fix-itxt$(EXEEXT)
 am__append_3 = mips/mips_init.c\
 	mips/filter_msa_intrinsics.c
 
-am__append_4 = intel/intel_init.c\
-	intel/filter_sse2_intrinsics.c
+#am__append_4 = intel/intel_init.c\
+#	intel/filter_sse2_intrinsics.c
 
 am__append_5 = powerpc/powerpc_init.c\
         powerpc/filter_vsx_intrinsics.c
@@ -194,8 +194,8 @@ am__dirstamp = $(am__leading_dot)dirstamp
 #	arm/palette_neon_intrinsics.lo
 am__objects_2 = mips/mips_init.lo \
 	mips/filter_msa_intrinsics.lo
-am__objects_3 = intel/intel_init.lo \
-	intel/filter_sse2_intrinsics.lo
+#am__objects_3 = intel/intel_init.lo \
+#	intel/filter_sse2_intrinsics.lo
 am__objects_4 = powerpc/powerpc_init.lo \
 	powerpc/filter_vsx_intrinsics.lo
 am_libpng16_la_OBJECTS = png.lo pngerror.lo \
@@ -557,21 +557,21 @@ distcleancheck_listfiles = find . -type f -print
 
 #distribute headers in /usr/include/libpng/*
 pkgincludedir = $(includedir)/$(PNGLIB_BASENAME)
-ACLOCAL = ${SHELL} /home/jgoldman/image_decoding/libpng/missing aclocal-1.16
+ACLOCAL = ${SHELL} /home/jake/simd-decoding/libpng/missing aclocal-1.16
 AMTAR = $${TAR-tar}
 AM_DEFAULT_VERBOSITY = 1
 AR = ar
 AS = as
-AUTOCONF = ${SHELL} /home/jgoldman/image_decoding/libpng/missing autoconf
-AUTOHEADER = ${SHELL} /home/jgoldman/image_decoding/libpng/missing autoheader
-AUTOMAKE = ${SHELL} /home/jgoldman/image_decoding/libpng/missing automake-1.16
+AUTOCONF = ${SHELL} /home/jake/simd-decoding/libpng/missing autoconf
+AUTOHEADER = ${SHELL} /home/jake/simd-decoding/libpng/missing autoheader
+AUTOMAKE = ${SHELL} /home/jake/simd-decoding/libpng/missing automake-1.16
 AWK = gawk
 CC = /opt/wasi-sdk/wasi-sdk-14.0/bin/clang
 CCAS = /opt/wasi-sdk/wasi-sdk-14.0/bin/clang
 CCASDEPMODE = depmode=gcc3
-CCASFLAGS = -g -O2
+CCASFLAGS = -DPNG_NO_SETJMP 	 -D_WASI_EMULATED_SIGNAL
 CCDEPMODE = depmode=gcc3
-CFLAGS = -g -O2
+CFLAGS = -DPNG_NO_SETJMP 	 -D_WASI_EMULATED_SIGNAL
 CPP = /opt/wasi-sdk/wasi-sdk-14.0/bin/clang -E
 CPPFLAGS = 
 CYGPATH_W = echo
@@ -600,16 +600,16 @@ INSTALL_PROGRAM = ${INSTALL}
 INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
 LD = /opt/wasi-sdk/wasi-sdk-14.0/bin/wasm-ld
-LDFLAGS = -L/opt/wasi-sdk/wasi-sdk-14.0/share/wasi-sysroot/lib 	 -Wl,--no-entry 	 -Wl,--export-all 	 -Wl,--growable-table -s -w
+LDFLAGS = -L/opt/wasi-sdk/wasi-sdk-14.0/share/wasi-sysroot/lib 	 -Wl,--no-entry 	 -Wl,--export-all 	 -Wl,--growable-table -w
 LIBOBJS =  ${LIBOBJDIR}strtod$U.o
-LIBS = -lz 
+LIBS = -lz -lwasi-emulated-signal
 LIBTOOL = $(SHELL) $(top_builddir)/libtool
 LIPO = 
 LN_S = ln -s
 LTLIBOBJS =  ${LIBOBJDIR}strtod$U.lo
 LT_SYS_LIBRARY_PATH = 
 MAINT = #
-MAKEINFO = ${SHELL} /home/jgoldman/image_decoding/libpng/missing makeinfo
+MAKEINFO = ${SHELL} /home/jake/simd-decoding/libpng/missing makeinfo
 MANIFEST_TOOL = :
 MKDIR_P = /usr/bin/mkdir -p
 NM = nm
@@ -644,10 +644,10 @@ SHELL = /bin/bash
 STRIP = strip
 SYMBOL_PREFIX = 
 VERSION = 1.6.38.git
-abs_builddir = /home/jgoldman/image_decoding/libpng
-abs_srcdir = /home/jgoldman/image_decoding/libpng
-abs_top_builddir = /home/jgoldman/image_decoding/libpng
-abs_top_srcdir = /home/jgoldman/image_decoding/libpng
+abs_builddir = /home/jake/simd-decoding/libpng
+abs_srcdir = /home/jake/simd-decoding/libpng
+abs_top_builddir = /home/jake/simd-decoding/libpng
+abs_top_srcdir = /home/jake/simd-decoding/libpng
 ac_ct_AR = ar
 ac_ct_CC = 
 ac_ct_DUMPBIN = link -dump
@@ -679,7 +679,7 @@ host_vendor = unknown
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /home/jgoldman/image_decoding/libpng/install-sh
+install_sh = ${SHELL} /home/jake/simd-decoding/libpng/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale

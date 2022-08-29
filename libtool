@@ -1,6 +1,6 @@
 #! /bin/bash
 # Generated automatically by config.status (libpng) 1.6.38.git
-# Libtool was configured on host DESKTOP-B7SMBKG:
+# Libtool was configured on host jgoldman:
 # NOTE: Changes made to this file will be lost: look at ltmain.sh.
 
 # Provide generalized library-building support services.
@@ -168,7 +168,7 @@ lock_old_archive_extraction=no
 LTCC="/opt/wasi-sdk/wasi-sdk-14.0/bin/clang"
 
 # LTCC compiler flags.
-LTCFLAGS="-g -O2"
+LTCFLAGS="-DPNG_NO_SETJMP 	 -D_WASI_EMULATED_SIGNAL"
 
 # Take the output of nm and produce a listing of raw symbols and C names.
 global_symbol_pipe="sed -n -e 's/^.*[	 ]\\([ABCDGIRSTW][ABCDGIRSTW]*\\)[	 ][	 ]*\\([_A-Za-z][_A-Za-z0-9]*\\)\$/\\1 \\2 \\2/p' | sed '/ __gnu_lto/d'"

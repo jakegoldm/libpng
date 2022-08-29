@@ -77,7 +77,7 @@
 /* #undef PNG_ARM_NEON_OPT */
 
 /* Enable Intel SSE optimizations */
-#define PNG_INTEL_SSE_OPT 1
+#define PNG_INTEL_SSE_OPT 0
 
 /* Turn on MIPS MSA optimizations at run-time */
 /* #undef PNG_MIPS_MSA_API_SUPPORTED */
