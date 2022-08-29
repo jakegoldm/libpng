@@ -12,12 +12,12 @@
 # Modeled after libxml-config.
 
 version="1.6.38.git"
-prefix="/usr/local"
+prefix="/opt/wasi-sdk/wasi-sdk-14.0/share/wasi-sysroot"
 exec_prefix="${prefix}"
 libdir="${exec_prefix}/lib"
 includedir="${prefix}/include/libpng16"
 libs="-lpng16"
-all_libs="-lpng16 -lm -lz -lm "
+all_libs="-lpng16 -lz -lwasi-emulated-signal"
 I_opts="-I${includedir}"
 L_opts="-L${libdir}"
 R_opts=""

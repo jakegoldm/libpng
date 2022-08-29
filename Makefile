@@ -99,7 +99,7 @@ NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
 build_triplet = x86_64-pc-linux-gnu
-host_triplet = x86_64-pc-linux-gnu
+host_triplet = wasm32-unknown-none
 check_PROGRAMS = pngtest$(EXEEXT) pngunknown$(EXEEXT) \
 	pngstest$(EXEEXT) pngimage$(EXEEXT) \
 	pngcp$(EXEEXT) $(am__EXEEXT_1)
@@ -120,10 +120,10 @@ am__append_5 = powerpc/powerpc_init.c\
 
 
 #   Versioned symbols and restricted exports
-#am__append_6 = -Wl,-M -Wl,libpng.vers
-am__append_7 = -Wl,--version-script=libpng.vers
+##am__append_6 = -Wl,-M -Wl,libpng.vers
+#am__append_7 = -Wl,--version-script=libpng.vers
 #   Only restricted exports when possible
-#am__append_8 = -export-symbols libpng.sym
+am__append_8 = -export-symbols libpng.sym
 #am__append_9 = -DPNG_PREFIX=''
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
@@ -566,14 +566,14 @@ AUTOCONF = ${SHELL} /home/jake/simd-decoding/libpng/missing autoconf
 AUTOHEADER = ${SHELL} /home/jake/simd-decoding/libpng/missing autoheader
 AUTOMAKE = ${SHELL} /home/jake/simd-decoding/libpng/missing automake-1.16
 AWK = gawk
-CC = gcc
-CCAS = gcc
+CC = /opt/wasi-sdk/wasi-sdk-14.0/bin/clang
+CCAS = /opt/wasi-sdk/wasi-sdk-14.0/bin/clang
 CCASDEPMODE = depmode=gcc3
-CCASFLAGS = -g -O2
+CCASFLAGS = -DPNG_NO_SETJMP 	 -D_WASI_EMULATED_SIGNAL
 CCDEPMODE = depmode=gcc3
-CFLAGS = -g -O2
-CPP = gcc -E
-CPPFLAGS = -I/opt/simde-no-tests/wasm
+CFLAGS = -DPNG_NO_SETJMP 	 -D_WASI_EMULATED_SIGNAL
+CPP = /opt/wasi-sdk/wasi-sdk-14.0/bin/clang -E
+CPPFLAGS = 
 CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
@@ -583,10 +583,10 @@ DEPDIR = .deps
 # checks input tokens for validity - effectively it performs part of the ANSI-C
 # parsing - and therefore fails with the .df files.  configure.ac has special
 # checks for this and sets DFNCPP appropriately.
-DFNCPP = gcc -E
+DFNCPP = /opt/wasi-sdk/wasi-sdk-14.0/bin/clang -E
 DLLTOOL = false
 DSYMUTIL = 
-DUMPBIN = 
+DUMPBIN = :
 ECHO_C = 
 ECHO_N = -n
 ECHO_T = 
@@ -599,20 +599,20 @@ INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_PROGRAM = ${INSTALL}
 INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
-LD = /usr/bin/ld -m elf_x86_64
-LDFLAGS = 
-LIBOBJS = 
-LIBS = -lm -lz -lm 
+LD = /opt/wasi-sdk/wasi-sdk-14.0/bin/wasm-ld
+LDFLAGS = -L/opt/wasi-sdk/wasi-sdk-14.0/share/wasi-sysroot/lib 	 -Wl,--no-entry 	 -Wl,--export-all 	 -Wl,--growable-table -w
+LIBOBJS =  ${LIBOBJDIR}strtod$U.o
+LIBS = -lz -lwasi-emulated-signal
 LIBTOOL = $(SHELL) $(top_builddir)/libtool
 LIPO = 
 LN_S = ln -s
-LTLIBOBJS = 
+LTLIBOBJS =  ${LIBOBJDIR}strtod$U.lo
 LT_SYS_LIBRARY_PATH = 
 MAINT = #
 MAKEINFO = ${SHELL} /home/jake/simd-decoding/libpng/missing makeinfo
 MANIFEST_TOOL = :
 MKDIR_P = /usr/bin/mkdir -p
-NM = /opt/wasi-sdk/wasi-sdk-14.0/bin/nm -B
+NM = nm
 NMEDIT = 
 OBJDUMP = objdump
 OBJEXT = o
@@ -649,8 +649,8 @@ abs_srcdir = /home/jake/simd-decoding/libpng
 abs_top_builddir = /home/jake/simd-decoding/libpng
 abs_top_srcdir = /home/jake/simd-decoding/libpng
 ac_ct_AR = ar
-ac_ct_CC = gcc
-ac_ct_DUMPBIN = 
+ac_ct_CC = 
+ac_ct_DUMPBIN = link -dump
 am__include = include
 am__leading_dot = .
 am__quote = 
@@ -671,11 +671,11 @@ datarootdir = ${prefix}/share
 docdir = ${datarootdir}/doc/${PACKAGE_TARNAME}
 dvidir = ${docdir}
 exec_prefix = ${prefix}
-host = x86_64-pc-linux-gnu
-host_alias = 
-host_cpu = x86_64
-host_os = linux-gnu
-host_vendor = pc
+host = wasm32-unknown-none
+host_alias = wasm32
+host_cpu = wasm32
+host_os = none
+host_vendor = unknown
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
@@ -692,7 +692,7 @@ pdfdir = ${docdir}
 # pkg-config stuff, note that libpng.pc is always required in order
 # to get the correct library
 pkgconfigdir = ${libdir}/pkgconfig
-prefix = /usr/local
+prefix = /opt/wasi-sdk/wasi-sdk-14.0/share/wasi-sysroot
 program_transform_name = s,x,x,
 psdir = ${docdir}
 sbindir = ${exec_prefix}/sbin
@@ -773,8 +773,8 @@ libpng16_la_LDFLAGS = -no-undefined \
 	-export-dynamic -version-number \
 	16:38:0 \
 	$(am__append_6) $(am__append_7) $(am__append_8)
-#libpng16_la_DEPENDENCIES = libpng.sym
-libpng16_la_DEPENDENCIES = libpng.vers
+libpng16_la_DEPENDENCIES = libpng.sym
+#libpng16_la_DEPENDENCIES = libpng.vers
 pkginclude_HEADERS = png.h pngconf.h
 nodist_pkginclude_HEADERS = pnglibconf.h
 pkgconfig_DATA = libpng16.pc
